@@ -1,2 +1,1 @@
-# Python_AI_tutor_COSC_461_final_project
-AI chatbot tutor for python 
+## AI chatbot tutor for teaching Python (COSC 461 Final Project)
