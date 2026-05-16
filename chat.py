@@ -1,7 +1,4 @@
-from model import llm
-from utils import get_qwen_chat_prompt
-from structured_response import provide_structured_response, LLMResponseFormat
-from system_prompt import system_prompt
+from structured_response import provide_structured_response
 
 def chatbot():
     # Start the loop
@@ -17,32 +14,11 @@ def chatbot():
 
         chat_history.append({"role": "user", "content": user_input})
 
-        # prompt = get_qwen_chat_prompt(chat_history)
+        output = provide_structured_response(user_input)
 
-        output = llm.create_chat_completion(
-            messages = [
-                { "role": "system", "content": system_prompt},
-                {"role": "user", "content": user_input}
-            ],
+        print(f"Assistant response:\n {output}")
 
-            response_format = {
-                "type": "json_schema",
-                "json_schema": {
-                    "name": "python tutor format",
-                    "schema": LLMResponseFormat.model_json_schema()
-                }
-            },
-            temperature=0.1
-        )
-
-        # Extract and print response
-        response = output['choices'][0]['message']['content']  # ✅ the actual text
-
-
-        print(f"Assistant response: {response}")
-        #
-        #
-        # chat_history.append({"role": "assistant", "content": assistant_response})
+        chat_history.append({"role": "assistant", "content": output})
 
 
 
