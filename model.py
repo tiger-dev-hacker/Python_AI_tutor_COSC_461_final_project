@@ -8,5 +8,6 @@ llm = Llama(
     model_path=path,
     n_gpu_layers=-1,
     n_ctx=4096,
-    verbose=False
+    verbose=False,
+    chat_format="chatml"
 )
