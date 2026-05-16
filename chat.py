@@ -1,4 +1,5 @@
-from structured_response import provide_structured_response
+from idna import decode
+from structured_response import provide_structured_response, decode_response
 
 def chatbot():
     # Start the loop
@@ -16,7 +17,7 @@ def chatbot():
 
         output = provide_structured_response(user_input)
 
-        print(f"Assistant response:\n {output}")
+        print(f"Assistant response:\n {decode_response(output)}")
 
         chat_history.append({"role": "assistant", "content": output})
 
