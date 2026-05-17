@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import Optional
 import json
 
+alphabets  = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 # The JSON schema that the model must follow
 class LLMResponseFormat(BaseModel):
@@ -33,28 +34,32 @@ def provide_structured_response(user_input):
 
         # Extract and print response
         raw =  output['choices'][0]['message']['content']
-        return LLMResponseFormat(**json.loads(raw))
+        answer =  LLMResponseFormat(**json.loads(raw))
     except Exception as e:
 
-        return LLMResponseFormat(
+        answer =  LLMResponseFormat(
             Concept_Explanation=str(e),
             Code_Example="Cannot provided examples at this time",
             Practice_Exercise=["No practice exercise provided"],
             Feedback_and_Debugging="Not available at the end",
         )
 
+    return decode_response(answer)
+
 def decode_response(object):
     response_dict = object.model_dump()
 
     response_key = ""
+
+    count = 1
     for key in response_dict:
         if response_dict[key] is not None:
             if isinstance(response_dict[key], list):
-                response_key += f"\n{key}: \n"
-                for problem in response_dict[key]:
-                    response_key += f"- {problem}\n"
+                response_key += f"\n {count}. {key}: \n"
+                for i, problem in enumerate(response_dict[key]):
+                    response_key += f" {alphabets[i % 26]}. {problem}\n"
             else:
-                response_key += f"\n - {key}: {response_dict[key]}\n"
-
+                response_key += f"\n {count}.  {key}: {response_dict[key]}\n"
+        count += 1
 
     return response_key
