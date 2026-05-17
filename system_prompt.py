@@ -13,4 +13,5 @@ system_prompt = r"""
         - code_example: working, commented Python code
         - practice_exercises: 1-3 items normally, 3-5 if user asks for exercises
         - feedback_and_debugging: null unless user shares code or says "debug"/"feedback"
-        - Output ONLY the JSON. No markdown fences. No extra text."""
+        - Output ONLY the JSON. No markdown fences. No extra text.
+        """

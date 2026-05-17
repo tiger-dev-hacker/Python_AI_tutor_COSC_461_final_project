@@ -1,27 +1,20 @@
 from idna import decode
 from structured_response import provide_structured_response, decode_response
 
-def chatbot():
+def chatbot(prompt):
     # Start the loop
     print("Qwen Chatbot started. Type 'quit' to exit")
 
     chat_history = []
 
-    while True:
-        user_input = input("Enter a response: ")
+    if prompt.lower() == 'quit':
+        return "quit"
 
-        if user_input.lower() == 'quit':
-            break
+    chat_history.append({"role": "user", "content": prompt})
 
-        chat_history.append({"role": "user", "content": user_input})
+    output = provide_structured_response(prompt)
 
-        output = provide_structured_response(user_input)
+    chat_history.append({"role": "assistant", "content": output})
 
-        print(f"Assistant response:\n {decode_response(output)}")
+    return decode_response(output)
 
-        chat_history.append({"role": "assistant", "content": output})
-
-
-
-if __name__ == "__main__":
-    chatbot()
