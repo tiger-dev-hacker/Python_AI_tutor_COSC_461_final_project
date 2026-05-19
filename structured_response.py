@@ -44,7 +44,7 @@ def provide_structured_response(user_input):
             Feedback_and_Debugging="Not available at the end",
         )
 
-    return decode_response(answer)
+    return answer
 
 def decode_response(object):
     response_dict = object.model_dump()
