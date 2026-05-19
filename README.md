@@ -35,10 +35,27 @@ A locally-hosted, conversational Python tutoring application powered by a quanti
 - A GPU with ~6 GB VRAM (or Apple Silicon with sufficient unified memory)
 - The model file: `qwen2.5-coder-7b-instruct-q5_k_m.gguf` placed in the project root
 
-Install dependencies:
+### Install dependencies:
 
 ```bash
 pip install streamlit llama-cpp-python pydantic transformers json typing
+```
+
+### Get Model weights:
+1. The model weights in gguf format can be found at https://huggingface.co/cfl0r3nc10/finetuned-qwen-tutor.
+2. To access the weights, sign up for huggingface and get the access token for huggingface token.
+3. Setup the weights into your directory containing the model scripts.
+
+HTTPS
+```bash
+git clone https://huggingface.co/<your-username>/<your-model-name>
+cp -r <your-model-name>/*.gguf <your-scripts-directory>
+```
+
+SSH
+```bash
+git clone git@hf.co:<your-username>/<your-model-name>
+cp -r <your-model-name>/*.gguf <your-scripts-directory>
 ```
 
 > For GPU acceleration, install `llama-cpp-python` with the appropriate backend flag.  
